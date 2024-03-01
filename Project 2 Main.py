@@ -24,12 +24,12 @@ from scipy.signal import butter,filtfilt,cheby1
 #Record the voice sample
 duration = 5
 sr = 44100
-'''
+''
 recording = sd.rec(int(duration*sr), samplerate=sr, channels=1)
 print("recording...............")
 sd.wait()
 write("sound.wav",sr,recording)
-'''
+''
 data, sampling_rate = librosa.load("sound.wav", sr = 44100)
 recording, sampling_rate = librosa.load("sound.wav", sr = 44100)
 print(data.shape)
@@ -150,14 +150,7 @@ stereospeechsine = np.rot90(np.stack([recording,speechchirp]),3)
 print(stereospeechsine.shape)
 sd.play(stereospeechsine)
 sf.write('teamholden-stereospeechsine.wav', stereospeechsine,sr, subtype='PCM_24')
-'''
-freq = librosa.amplitude_to_db(np.abs(librosa.stft(recording)), ref=np.max)
-fig, ax = plt.subplots(nrows=2, ncols=1, sharex=True)
-img = librosa.display.specshow(freq, x_axis='time', y_axis='linear', ax=ax, sr=sr, fmin=1000, fmax=8000)
-ax.set(title='Spectrogram of Recording.')
-fig.colorbar(img, ax=ax)
-plt.show()
-'''
+
 freq = librosa.amplitude_to_db(np.abs(librosa.stft(recording)), ref=np.max)
 freq2 = librosa.amplitude_to_db(np.abs(librosa.stft(speechchirp)), ref=np.max)
 
